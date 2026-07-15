@@ -321,6 +321,92 @@ svg,img{max-width:100%;height:auto;display:block}
 @media(max-width:760px){.daySummaryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.githubInfoGrid{grid-template-columns:1fr}.scheduleTop{align-items:stretch}.scheduleMode{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.scheduleModeBtn{width:100%;padding:9px 6px}.scheduleItem summary{grid-template-columns:58px minmax(0,1fr) auto;gap:7px}.scheduleDetails{padding-left:70px}}
 @media(max-width:430px){.scheduleItem summary{grid-template-columns:53px minmax(0,1fr);padding:11px 10px}.scheduleStatus{grid-column:2;justify-self:start}.scheduleDetails{padding:0 10px 11px 63px}.daySummaryGrid{grid-template-columns:1fr}.dayTimeline:before{left:11px}.scheduleTime:before{left:5px}.scheduleMode{grid-template-columns:1fr 1fr}.scheduleModeBtn.auto{grid-column:1/-1}.backupButtons>*{width:100%}}
 
+
+/* GitHub Pages UI hotfix v21.1: fixed-width, non-wrapping timeline time column. */
+.scheduleItem summary{
+  position:relative;
+  grid-template-columns:64px minmax(0,1fr) auto;
+  column-gap:12px;
+  row-gap:7px;
+  align-items:flex-start;
+}
+.scheduleTime{
+  box-sizing:border-box;
+  display:block;
+  min-width:64px;
+  width:64px;
+  max-width:64px;
+  flex:0 0 64px;
+  padding-left:0;
+  white-space:nowrap;
+  overflow-wrap:normal!important;
+  word-break:normal;
+  hyphens:none;
+  font-variant-numeric:tabular-nums;
+  font-feature-settings:"tnum" 1,"lnum" 1;
+  font-size:18px;
+  text-align:right;
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.scheduleTime::before{
+  content:none!important;
+  display:none!important;
+}
+.scheduleItem summary::before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:12px;
+  top:21px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:#18253a;
+  border:2px solid #78a9ff;
+  box-shadow:0 0 0 4px rgba(7,10,16,.82);
+  pointer-events:none;
+}
+.dayTimeline::before{left:12px}
+.scheduleItem.status-now summary::before{
+  background:#72f2a5;
+  border-color:#d9ffe8;
+  box-shadow:0 0 0 5px rgba(114,242,165,.14);
+}
+.scheduleItem.status-done summary::before{
+  background:#72f2a5;
+  border-color:#72f2a5;
+}
+.scheduleDetails{padding-left:88px}
+
+@media(max-width:760px){
+  .scheduleItem summary{
+    grid-template-columns:64px minmax(0,1fr) auto;
+    column-gap:10px;
+  }
+  .scheduleDetails{padding-left:86px}
+}
+
+@media(max-width:430px){
+  .scheduleItem summary{
+    grid-template-columns:64px minmax(0,1fr);
+    column-gap:10px;
+    padding:11px 10px;
+  }
+  .scheduleTime{
+    min-width:64px;
+    width:64px;
+    max-width:64px;
+    flex:0 0 64px;
+    font-size:18px;
+  }
+  .scheduleStatus{grid-column:2;justify-self:start}
+  .scheduleItem summary::before{left:10px;top:20px}
+  .dayTimeline::before{left:10px}
+  .scheduleDetails{padding:0 10px 11px 84px}
+}
+
 </style>
 </head>
 <body>
