@@ -466,6 +466,36 @@ svg,img{max-width:100%;height:auto;display:block}
 @media(max-width:430px){.food-os-header{grid-template-columns:1fr}.food-os-summary{grid-column:auto}.food-os-meal-head{grid-template-columns:58px minmax(0,1fr)}.food-os-status{grid-column:2;justify-self:start}.food-os-actions{display:grid;grid-template-columns:1fr 1fr}.food-os-btn{width:100%}.food-os-week-row{grid-template-columns:48px minmax(0,1fr)}.food-os-week-status{grid-column:2}}
 @media(max-width:340px){.food-os-actions{grid-template-columns:1fr}.food-os-meal-head{grid-template-columns:52px minmax(0,1fr)}.food-os-time{font-size:16px}}
 
+
+/* Food OS v1.1 — exact weekly shopping and preparation */
+.food-os-shopping-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:11px}
+.food-os-shopping-top h2{margin-bottom:4px}
+.food-os-shopping-summary{display:flex;gap:7px;flex-wrap:wrap}
+.food-os-shopping-table{display:grid;gap:7px;min-width:0}
+.food-os-shopping-row{display:grid;grid-template-columns:34px minmax(150px,1.05fr) minmax(100px,.62fr) minmax(130px,.78fr) minmax(210px,1.5fr);gap:9px;align-items:center;min-width:0;padding:10px;border-radius:15px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.food-os-shopping-row.head{padding:0 10px;background:transparent;border:0;color:var(--muted);font-size:11px;font-weight:950}
+.food-os-shopping-row.is-done{opacity:.58;background:rgba(114,242,165,.055);border-color:rgba(114,242,165,.22)}
+.food-os-shopping-row.is-done .food-os-shopping-product{text-decoration:line-through}
+.food-os-shopping-check{width:19px;height:19px;margin:0;accent-color:#72f2a5;cursor:pointer}
+.food-os-shopping-product{font-weight:950;overflow-wrap:anywhere}
+.food-os-shopping-cell{min-width:0;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
+.food-os-shopping-buy{font-weight:900;color:#dfffea}
+.food-os-cell-label{display:none;color:var(--muted);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.035em;margin-bottom:2px}
+.food-os-prep-list{display:grid;gap:8px}
+.food-os-prep-item{display:grid;grid-template-columns:25px minmax(0,1fr);gap:9px;padding:11px;border-radius:15px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);cursor:pointer}
+.food-os-prep-item.is-done{opacity:.58;background:rgba(114,242,165,.055);border-color:rgba(114,242,165,.22)}
+.food-os-prep-item input{width:19px;height:19px;margin:1px 0 0;accent-color:#72f2a5}
+.food-os-prep-item b{display:block;margin-bottom:3px}
+.food-os-prep-item>div>span{display:block;color:var(--muted);font-size:12px;line-height:1.45}
+.food-os-shopping-note{margin-top:10px;padding:10px 11px;border-radius:14px;background:rgba(120,169,255,.06);border:1px solid rgba(120,169,255,.14);font-size:12px;line-height:1.45;color:#cbd8eb}
+@media(max-width:760px){
+  .food-os-shopping-row.head{display:none}
+  .food-os-shopping-row{grid-template-columns:28px minmax(0,1fr);align-items:start}
+  .food-os-shopping-row>.food-os-shopping-cell{grid-column:2}
+  .food-os-shopping-row>.food-os-shopping-check{grid-column:1;grid-row:1}
+  .food-os-cell-label{display:block}
+}
+
 </style>
 </head>
 <body>
@@ -473,7 +503,7 @@ svg,img{max-width:100%;height:auto;display:block}
 <div class="app">
   <div class="hero">
     <h1>Bolot-Holand</h1>
-    <div class="sub">Canonical baseline v19 сохранена без отката: Food, Training days, чек-листы, journal/analytics, Health/AI, localStorage, напоминания и iOS overflow-fix. Hotfix: наглядные двухфазные exercise-визуализации и восстановленный финальный Supplements.</div>
+    <div class="sub">Персональная система питания, тренировок, восстановления и контроля прогресса.</div>
     <div class="chips"><span class="chip">Калории: <b>3900–4300</b></span><span class="chip">Белок: <b>130–160 г</b></span><span class="chip">Цель: <b>60 → 68 → 72–75 кг</b></span><span class="chip">Заготовки: <b>700–1300 ккал</b></span><span class="chip">Сборка: <b>5–15 минут</b></span><span class="chip">Техника: <b>26 упражнений</b></span></div>
   </div>
 
@@ -611,7 +641,25 @@ svg,img{max-width:100%;height:auto;display:block}
     </div>
   </section>
 
-  <section class="screen" id="spar"><div class="grid cols2"><div class="card"><h2>Закупка и заготовки · SPAR-логика сохранена</h2><div class="table"><div class="tr head"><div>Категория</div><div>Что брать</div><div>Кол-во</div></div><div class="tr"><div><b>Молоко</b></div><div>3.2–3.5%, безлактозное при ЖКТ</div><div>5–7 л</div></div><div class="tr"><div><b>Кулинария</b></div><div>курица гриль, котлеты, люля, шашлык, готовое мясо</div><div>1.5–2.5 кг</div></div><div class="tr"><div><b>Заморозка</b></div><div>пельмени, хинкали, котлеты для бургеров</div><div>2–3 кг</div></div><div class="tr"><div><b>Белковые перекусы</b></div><div>пудинги, питьевые йогурты</div><div>5–8 шт.</div></div><div class="tr"><div><b>Вкус</b></div><div>сыр, сметана, соусы, пломбир, бананы, какао</div><div>по плану</div></div></div></div><div class="card"><h2>Для быстрых заготовок</h2><div id="sparPrep"></div></div></div></section>
+  <section class="screen" id="spar">
+    <div class="food-os-shell">
+      <div class="card">
+        <div class="food-os-shopping-top">
+          <div>
+            <h2>Точный список покупок на неделю</h2>
+            <div class="small muted">Автоматически рассчитан из текущего меню и граммовок блюд.</div>
+          </div>
+          <div class="food-os-shopping-summary" id="foodOSShoppingSummary"></div>
+        </div>
+        <div id="foodOSShoppingRoot"></div>
+      </div>
+      <div class="card">
+        <h2>Что подготовить на неделю</h2>
+        <div class="small muted" style="margin-bottom:10px">Конкретные порции, заготовки и хранение под утверждённое меню.</div>
+        <div id="foodOSPrepRoot"></div>
+      </div>
+    </div>
+  </section>
 
   <section class="screen" id="control"><div class="grid cols2"><div class="card"><h2>Контроль темпа набора</h2><div class="table"><div class="tr head"><div>Средняя за 7 дней</div><div>Решение</div><div>Действие</div></div><div class="tr"><div><b>+0.4–0.8 кг/нед</b></div><div>Оставить</div><div>3900–4300 ккал</div></div><div class="tr"><div><b>&lt;+0.3 кг/нед</b></div><div>Поднять</div><div>+200–250 ккал/день</div></div><div class="tr"><div><b>&gt;+1.0 кг/нед 2 недели</b></div><div>Снизить</div><div>−150–250 ккал/день</div></div><div class="tr"><div><b>ЖКТ/сон ухудшились</b></div><div>Проверить</div><div>не усиливать курс</div></div></div></div><div class="card"><h2>Напоминания</h2><div class="day"><div class="time">10:30</div><div>Утренний чек: вес, свет, завтрак/коктейль, креатин.</div></div><div class="day"><div class="time">22:30</div><div>Заполнить журнал.</div></div><div class="actionRow"><button class="mainBtn" id="downloadRemindersBtn">Скачать .ics</button><button class="secondaryBtn" id="testBrowserNotifyBtn">Тест уведомления</button></div></div><div class="card full anchor" id="vacuum-rules"><h2>Вакуумирование, хранение, разморозка и безопасность</h2><div class="grid cols2"><div><ol class="small"><li>Вакуум не делает продукт «вечной консервой».</li><li>Готовое мясо и начинку планировать на 2–3 дня; остальное сразу замораживать.</li><li>Не герметизировать парующую горячую еду. Разделить на небольшие неглубокие порции и быстро охладить.</li><li>Не держать готовую еду при комнатной температуре дольше 2 часов.</li><li>Один пакет = одна порция.</li><li>Маркировка: название, вес, дата, готовое/сырое.</li><li>Сырое и готовое хранить отдельно; сырое ниже готового в холодильнике.</li><li>Размораживать в холодильнике; быстрые способы — микроволновка или холодная вода в герметичном пакете с немедленной готовкой.</li><li>Повторно разогревать до горячего центра; для точности использовать термометр.</li><li>При сомнении в хранении, нарушенной упаковке или признаках порчи — выбросить.</li></ol></div><div><h3>Стандартные порции</h3><div class="pillgrid"><span class="pill">мясо 200–250 г</span><span class="pill">фарш-начинка 220–250 г</span><span class="pill">митболы 250–300 г</span><span class="pill">котлеты 2×120–150 г</span><span class="pill">сырое мясо 300–500 г</span><span class="pill">бананы 1–2 шт.</span></div><div class="note warn"><b>Важно:</b> запах и цвет не гарантируют безопасность. Основной контроль — время, температура и целостность упаковки.</div></div></div></div></div></section>
 
@@ -1314,8 +1362,6 @@ function renderExerciseGuide(){
 function openExerciseGuide(dayId,exerciseId){document.getElementById('t4').checked=true;const day=document.getElementById(`guide-day-${dayId}`);if(day)day.open=true;const target=exerciseId?document.getElementById(`exercise-${exerciseId}`):day;if(exerciseId&&target)target.open=true;setTimeout(()=>target?.scrollIntoView({behavior:'smooth',block:'start'}),80);}
 function initGuideNavigation(){document.addEventListener('click',e=>{const btn=e.target.closest('[data-guide-day],[data-guide-exercise]');if(!btn)return;const exerciseId=btn.dataset.guideExercise||'',dayId=btn.dataset.guideDay||EXERCISES.find(x=>x.id===exerciseId)?.day;if(dayId){e.preventDefault();openExerciseGuide(dayId,exerciseId);}});}
 
-const sparGroups={"Хлеб / база":["Чиабатта","Фокачча","Матнакаш","Лаваш","Тортильи","Булки для бургеров","Картофель"],"Мясо":["Фарш говядина/свинина","Фарш говяжий 80/20","Куриное бедро","Свинина/шея/карбонад","Говядина для тушения","Ростбиф/готовая говядина — только нормальный состав"],"Сыр":["Сулугуни","Моцарелла","Чеддер","Гауда","Российский сыр","Плавленый сыр для бургеров"],"Овощи":["Лук","Болгарский перец","Шампиньоны","Кукуруза","Маринованные огурцы","Зелень","Салат","Томатная паста"],"Соусы":["Аджика","Томатный соус","Сырный соус","Барбекю","Чесночный","Сметана 20%","Майонез/кетчуп умеренно"],"Инвентарь":["Пакеты для вакууматора","Пергамент","Фольга","Контейнеры","Маркер","Кухонный термометр"]};
-function renderSpar(){document.getElementById('sparPrep').innerHTML=Object.entries(sparGroups).map(([k,v])=>`<details open><summary>${k}</summary><div class="pillgrid">${v.map(x=>`<span class="pill">${x}</span>`).join('')}</div></details>`).join('');}
 function checkKeyCandidates(){const d=isoToday();return [`haaland_checks_${d}`,`haaland_daily_checks_${d}`,`haaland_checklist_${d}`];}
 function todayKey(){return checkKeyCandidates()[0];}
 function loadChecks(){let saved={};for(const key of checkKeyCandidates()){try{const raw=localStorage.getItem(key);if(raw){saved=JSON.parse(raw);break;}}catch(e){}}document.querySelectorAll('#dailyChecks input').forEach(i=>i.checked=!!saved[i.dataset.check]);updateCheckUI();}
@@ -1419,6 +1465,8 @@ const foodOSKeys={
  recipes:'haaland_food_os_recipes_v1',
  weekPlans:'haaland_food_os_week_plans_v1',
  dailyProgress:'haaland_food_os_daily_progress_v1',
+ shopping:'haaland_food_os_shopping_v1',
+ prep:'haaland_food_os_prep_v1',
  migration:'haaland_food_os_migration_v1'
 };
 let foodOSState=null;
@@ -1436,12 +1484,28 @@ function foodOSDefaultsRecipes(){return [
 {id:'solyanka',title:'Солянка с хлебом и сметаной',ingredients:[{name:'Солянка',grams:'500 г'},{name:'Хлеб',grams:'120 г'},{name:'Сметана',grams:'50 г'}],kcal:900,protein:38,comment:'Основной вечерний приём.'},
 {id:'quesadilla-v1',title:'Мясная кесадилья v1',ingredients:[{name:'Тортильи',grams:'120 г'},{name:'Свино-говяжий фарш',grams:'200 г'},{name:'Моцарелла',grams:'90 г'},{name:'Лук',grams:'40 г'},{name:'Сладкий перец',grams:'60 г'},{name:'Гладкий томатный соус',grams:'50 г'},{name:'Масло',grams:'10 г'}],kcal:1050,protein:55,comment:'Первый вариант блюда; без рейтинга и тестовых статусов на этапе 1.'},
 {id:'pork-potatoes-v1',title:'Свинина с картофельными дольками v1',ingredients:[{name:'Свиная шея',grams:'250 г'},{name:'Картофельные дольки',grams:'400 г'},{name:'Сырный соус',grams:'60 г'},{name:'Маринованные огурцы',grams:'70 г'},{name:'Лук',grams:'40 г'},{name:'Масло',grams:'10 г'}],kcal:1250,protein:58,comment:'Первый вариант блюда; без рейтинга и тестовых статусов на этапе 1.'},
-{id:'planned-delivery',title:'Запланированная доставка',ingredients:[{name:'Блюдо доставки',grams:'указать после заказа'}],kcal:1000,protein:45,comment:'Отредактировать по фактическому заказу.'},
 {id:'closing-meal',title:'Закрывающий приём',ingredients:[{name:'Молоко',grams:'300 мл'},{name:'Сывороточный протеин',grams:'30 г'},{name:'Хлопья',grams:'70 г'}],kcal:560,protein:38,comment:'Расчёт ориентировочный. Уточняется по данным конкретной упаковки.'}
 ];}
-function foodOSDefaultsWeek(){const main={1:['lavash-chicken','khinkali'],2:['ciabatta-chicken','meat-lasagna'],3:['lavash-chicken','quesadilla-v1'],4:['ciabatta-chicken','meat-pizza'],5:['lavash-chicken','solyanka'],6:['meat-lasagna','pork-potatoes-v1'],0:['ciabatta-chicken','planned-delivery']};const days={};Object.keys(main).forEach(k=>{days[k]=['morning-shake',main[k][0],'calorie-topup',main[k][1],'closing-meal'];});return {version:1,days,updatedAt:null};}
-function foodOSCreateMissing(){const defaults=[[foodOSKeys.settings,foodOSDefaultsSettings()],[foodOSKeys.recipes,foodOSDefaultsRecipes()],[foodOSKeys.weekPlans,foodOSDefaultsWeek()],[foodOSKeys.dailyProgress,{}],[foodOSKeys.migration,{version:1,createdAt:new Date().toISOString(),source:'existing production food sections preserved only through migration marker'}]];defaults.forEach(([k,v])=>{if(localStorage.getItem(k)===null)foodOSWrite(k,v);});}
-function foodOSLoad(){foodOSCreateMissing();const settings=foodOSRead(foodOSKeys.settings,foodOSDefaultsSettings());const recipes=foodOSRead(foodOSKeys.recipes,foodOSDefaultsRecipes());const week=foodOSRead(foodOSKeys.weekPlans,foodOSDefaultsWeek());const progress=foodOSRead(foodOSKeys.dailyProgress,{});return {settings:settings&&typeof settings==='object'?settings:foodOSDefaultsSettings(),recipes:Array.isArray(recipes)?recipes:foodOSDefaultsRecipes(),week:week&&typeof week==='object'?week:foodOSDefaultsWeek(),progress:progress&&typeof progress==='object'?progress:{}};}
+function foodOSDefaultsWeek(){const main={1:['lavash-chicken','khinkali'],2:['ciabatta-chicken','meat-lasagna'],3:['lavash-chicken','quesadilla-v1'],4:['ciabatta-chicken','meat-pizza'],5:['lavash-chicken','solyanka'],6:['meat-lasagna','pork-potatoes-v1'],0:['ciabatta-chicken','khinkali']};const days={};Object.keys(main).forEach(k=>{days[k]=['morning-shake',main[k][0],'calorie-topup',main[k][1],'closing-meal'];});return {version:2,days,updatedAt:null};}
+function foodOSCreateMissing(){const defaults=[[foodOSKeys.settings,foodOSDefaultsSettings()],[foodOSKeys.recipes,foodOSDefaultsRecipes()],[foodOSKeys.weekPlans,foodOSDefaultsWeek()],[foodOSKeys.dailyProgress,{}],[foodOSKeys.shopping,{}],[foodOSKeys.prep,{}],[foodOSKeys.migration,{version:1,createdAt:new Date().toISOString()}]];defaults.forEach(([k,v])=>{if(localStorage.getItem(k)===null)foodOSWrite(k,v);});}
+function foodOSMigrateV11(){
+ const marker=foodOSRead(foodOSKeys.migration,{});
+ if(marker&&marker.foodOSV11Done)return;
+ const obsoleteId='planned-delivery';
+ let recipes=foodOSRead(foodOSKeys.recipes,foodOSDefaultsRecipes());
+ recipes=Array.isArray(recipes)?recipes.filter(r=>r&&r.id!==obsoleteId):foodOSDefaultsRecipes();
+ foodOSDefaultsRecipes().forEach(def=>{if(!recipes.some(r=>r.id===def.id))recipes.push(def);});
+ let week=foodOSRead(foodOSKeys.weekPlans,foodOSDefaultsWeek());
+ if(!week||typeof week!=='object')week=foodOSDefaultsWeek();
+ if(!week.days||typeof week.days!=='object')week.days=foodOSDefaultsWeek().days;
+ Object.keys(week.days).forEach(day=>{if(Array.isArray(week.days[day]))week.days[day]=week.days[day].map(id=>id===obsoleteId?'khinkali':id);});
+ week.version=Math.max(Number(week.version)||1,2);
+ week.updatedAt=new Date().toISOString();
+ foodOSWrite(foodOSKeys.recipes,recipes);
+ foodOSWrite(foodOSKeys.weekPlans,week);
+ foodOSWrite(foodOSKeys.migration,{...marker,version:2,foodOSV11Done:true,foodOSV11At:new Date().toISOString()});
+}
+function foodOSLoad(){foodOSCreateMissing();foodOSMigrateV11();const settings=foodOSRead(foodOSKeys.settings,foodOSDefaultsSettings());const recipes=foodOSRead(foodOSKeys.recipes,foodOSDefaultsRecipes());const week=foodOSRead(foodOSKeys.weekPlans,foodOSDefaultsWeek());const progress=foodOSRead(foodOSKeys.dailyProgress,{});return {settings:settings&&typeof settings==='object'?settings:foodOSDefaultsSettings(),recipes:Array.isArray(recipes)?recipes:foodOSDefaultsRecipes(),week:week&&typeof week==='object'?week:foodOSDefaultsWeek(),progress:progress&&typeof progress==='object'?progress:{}};}
 function foodOSRecipe(id){return foodOSState?.recipes?.find(x=>x.id===id)||null;}
 function foodOSDateKey(){try{return typeof scheduleDayKey==='function'?scheduleDayKey():isoToday();}catch(e){return isoToday();}}
 function foodOSWeekday(){try{return typeof scheduleDayDate==='function'?scheduleDayDate().getDay():new Date().getDay();}catch(e){return new Date().getDay();}}
@@ -1458,12 +1522,149 @@ function foodOSRenderToday(){const root=document.getElementById('foodOSTodayRoot
 function foodOSRenderTodayCompact(){const root=document.getElementById('todayFood');if(!root)return;const totals=foodOSTotals(),done=foodOSDayProgress().done||{},training=foodOSIsTraining(),pct=Math.round(totals.doneCount/5*100);root.innerHTML=`<div class="food-os-shell"><div class="food-os-header"><div class="food-os-summary"><b>${totals.doneKcal} ккал · ${totals.doneProtein} г белка</b><span>${totals.doneCount}/5 приёмов · ${pct}% дня</span></div></div><div class="food-os-progress"><span style="width:${pct}%"></span></div><div class="food-os-meals">${foodOSGetDayPlan().map(m=>foodOSMealHtml(m,!!done[m.slot],training)).join('')}</div></div>`;foodOSBindMealActions(root);}
 function foodOSRenderWeek(){const root=document.getElementById('foodOSWeekRoot');if(!root)return;const names={1:'Понедельник',2:'Вторник',3:'Среда',4:'Четверг',5:'Пятница',6:'Суббота',0:'Воскресенье'},today=foodOSWeekday(),order=[1,2,3,4,5,6,0],monday=new Date();monday.setHours(12,0,0,0);monday.setDate(monday.getDate()-((monday.getDay()+6)%7));root.innerHTML=`<h2 style="margin-bottom:4px">Food OS · Неделя</h2><div class="small muted" style="margin-bottom:10px">Пять приёмов ежедневно. Выполнение берётся из дневного прогресса.</div><div class="food-os-week">${order.map((day,index)=>{const date=new Date(monday);date.setDate(monday.getDate()+index);const key=date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');const p=foodOSState.progress[key]?.done||{};return `<section class="food-os-day ${day===today?'is-today':''}"><div class="food-os-day-head"><b>${names[day]}</b>${day===today?'<span class="badge green">сегодня</span>':''}</div>${foodOSGetDayPlan(day).map(m=>`<div class="food-os-week-row"><span class="food-os-time">${escHtml(m.time)}</span><span>${escHtml(m.title)}<br><span class="muted">${m.kcal} ккал · ${m.protein} г</span></span><span class="food-os-week-status">${p[m.slot]?'съедено':'по плану'}</span></div>`).join('')}</section>`;}).join('')}</div>`;}
 function foodOSParseIngredients(text){return String(text||'').split(/\n+/).map(x=>x.trim()).filter(Boolean).map(line=>{const parts=line.split(/\s+[—-]\s+/);return {name:(parts.shift()||'').trim(),grams:parts.join(' — ').trim()};});}
+
+const FOOD_OS_INGREDIENT_ALIASES={
+ 'молоко':'Молоко 3,2–3,5%','молоко 3,2–3,5%':'Молоко 3,2–3,5%','банан':'Бананы','бананы':'Бананы',
+ 'мороженое':'Мороженое','какао':'Какао','креатин':'Креатин','гейнер':'Гейнер',
+ 'тонкий лаваш':'Тонкий лаваш','курица':'Курица','моцарелла':'Моцарелла','сырный соус':'Сырный соус',
+ 'огурцы и салат':'Огурцы и салат','чиабатта':'Чиабатта','гладкий томатный соус':'Гладкий томатный соус',
+ 'хинкали':'Хинкали','сметана':'Сметана','мясная лазанья':'Мясная лазанья','мясная пицца':'Мясная пицца',
+ 'солянка':'Солянка','хлеб':'Хлеб','тортильи':'Тортильи','свино-говяжий фарш':'Свино-говяжий фарш',
+ 'лук':'Лук','сладкий перец':'Сладкий перец','масло':'Масло','свиная шея':'Свиная шея',
+ 'картофельные дольки':'Картофельные дольки','маринованные огурцы':'Маринованные огурцы',
+ 'сывороточный протеин':'Сывороточный протеин','хлопья':'Хлопья'
+};
+const FOOD_OS_CATEGORY_ORDER={'Мясо и готовые блюда':1,'Молочное и сыр':2,'Хлеб и основа':3,'Овощи и соусы':4,'Сухие смеси и добавки':5,'Прочее':6};
+function foodOSCanonicalIngredient(name){const clean=String(name||'').trim().replace(/\s+/g,' '),key=clean.toLowerCase().replace(/ё/g,'е');return FOOD_OS_INGREDIENT_ALIASES[key]||clean;}
+function foodOSIngredientCategory(name){
+ if(['Курица','Хинкали','Мясная лазанья','Мясная пицца','Солянка','Свино-говяжий фарш','Свиная шея'].includes(name))return 'Мясо и готовые блюда';
+ if(['Молоко 3,2–3,5%','Мороженое','Моцарелла','Сметана'].includes(name))return 'Молочное и сыр';
+ if(['Тонкий лаваш','Чиабатта','Хлеб','Тортильи','Картофельные дольки','Хлопья'].includes(name))return 'Хлеб и основа';
+ if(['Огурцы и салат','Гладкий томатный соус','Сырный соус','Лук','Сладкий перец','Маринованные огурцы','Масло'].includes(name))return 'Овощи и соусы';
+ if(['Гейнер','Какао','Креатин','Сывороточный протеин','Бананы'].includes(name))return 'Сухие смеси и добавки';
+ return 'Прочее';
+}
+function foodOSParseMeasure(value){
+ const raw=String(value||'').trim().toLowerCase().replace(',','.');
+ const match=raw.match(/(\d+(?:\.\d+)?)\s*(мл|л|г|кг)(?:\s|$)/i);
+ if(!match)return {amount:null,unit:'',raw:String(value||'').trim()};
+ let amount=Number(match[1]),unit=match[2].toLowerCase();
+ if(unit==='л'){amount*=1000;unit='мл';}
+ if(unit==='кг'){amount*=1000;unit='г';}
+ return {amount,unit,raw:String(value||'').trim()};
+}
+function foodOSWeekStartKey(){
+ const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));
+ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function foodOSWeekRecipeCounts(){
+ const counts={};const days=foodOSState?.week?.days||foodOSDefaultsWeek().days;
+ Object.values(days).forEach(ids=>{if(Array.isArray(ids))ids.forEach(id=>{counts[id]=(counts[id]||0)+1;});});
+ return counts;
+}
+function foodOSShoppingItems(){
+ const counts=foodOSWeekRecipeCounts(),items=new Map();
+ Object.entries(counts).forEach(([recipeId,count])=>{
+  const recipe=foodOSRecipe(recipeId)||foodOSDefaultsRecipes().find(r=>r.id===recipeId);
+  if(!recipe)return;
+  (recipe.ingredients||[]).forEach(ingredient=>{
+   const name=foodOSCanonicalIngredient(ingredient.name),measure=foodOSParseMeasure(ingredient.grams),key=name+'|'+(measure.unit||measure.raw);
+   if(!items.has(key))items.set(key,{key,name,unit:measure.unit,amount:0,raw:measure.raw,category:foodOSIngredientCategory(name),dishes:{}});
+   const item=items.get(key);
+   if(measure.amount!==null)item.amount+=measure.amount*count;
+   item.dishes[recipe.title]=(item.dishes[recipe.title]||0)+count;
+  });
+ });
+ return [...items.values()].sort((a,b)=>(FOOD_OS_CATEGORY_ORDER[a.category]||99)-(FOOD_OS_CATEGORY_ORDER[b.category]||99)||a.name.localeCompare(b.name,'ru'));
+}
+function foodOSNumber(value,digits=2){return Number(value||0).toLocaleString('ru-RU',{maximumFractionDigits:digits});}
+function foodOSFormatNeed(item){
+ if(item.amount===null||!item.unit)return item.raw||'уточнить';
+ if(item.unit==='мл'&&item.amount>=1000)return foodOSNumber(item.amount/1000)+' л';
+ if(item.unit==='г'&&item.amount>=1000)return foodOSNumber(item.amount/1000)+' кг';
+ return foodOSNumber(item.amount,0)+' '+item.unit;
+}
+function foodOSPack(amount,size,label){return Math.ceil(amount/size)+' × '+label;}
+function foodOSPurchaseText(item){
+ const a=Number(item.amount)||0,n=item.name;
+ if(n==='Молоко 3,2–3,5%')return foodOSPack(a,1000,'1 л');
+ if(n==='Гейнер')return foodOSPack(a,1000,'1 кг');
+ if(n==='Бананы')return Math.ceil(a/1000)+' кг';
+ if(n==='Мороженое')return foodOSPack(a,500,'500 г');
+ if(n==='Какао')return foodOSPack(a,100,'100 г');
+ if(n==='Креатин')return 'проверить запас ≥ '+foodOSNumber(a,0)+' г';
+ if(n==='Сывороточный протеин')return 'проверить запас ≥ '+foodOSNumber(a,0)+' г; иначе 1 × 500 г';
+ if(n==='Хлопья')return foodOSPack(a,500,'500 г');
+ if(n==='Курица')return foodOSNumber(Math.ceil(a/100)/10,1)+' кг';
+ if(n==='Моцарелла')return foodOSPack(a,200,'200 г');
+ if(n==='Тонкий лаваш')return foodOSPack(a,100,'100 г');
+ if(n==='Сырный соус')return foodOSPack(a,250,'250 г');
+ if(n==='Огурцы и салат')return '2 огурца + 1 упаковка салата';
+ if(n==='Чиабатта')return foodOSPack(a,160,'160 г');
+ if(n==='Гладкий томатный соус')return foodOSPack(a,250,'250 г');
+ if(n==='Хинкали')return foodOSPack(a,1000,'1 кг');
+ if(n==='Сметана')return foodOSPack(a,200,'200 г');
+ if(n==='Мясная лазанья')return foodOSPack(a,500,'500 г');
+ if(n==='Мясная пицца')return foodOSPack(a,500,'500 г');
+ if(n==='Солянка')return foodOSPack(a,500,'500 г');
+ if(n==='Хлеб')return '1 небольшой батон 300–400 г';
+ if(n==='Тортильи')return '1 упаковка 200–250 г';
+ if(n==='Свино-говяжий фарш')return '1 упаковка 300–400 г';
+ if(n==='Лук')return '1 крупная луковица';
+ if(n==='Сладкий перец')return '1 крупный перец';
+ if(n==='Масло')return 'из запаса; иначе 1 бутылка 500 мл';
+ if(n==='Свиная шея')return foodOSNumber(Math.ceil(a/100)/10,1)+' кг';
+ if(n==='Картофельные дольки')return foodOSPack(a,500,'500 г');
+ if(n==='Маринованные огурцы')return '1 банка 300–500 г';
+ if(item.unit==='мл')return foodOSNumber(Math.ceil(a/100)*100,0)+' мл';
+ if(item.unit==='г')return foodOSNumber(Math.ceil(a/50)*50,0)+' г';
+ return item.raw||'уточнить';
+}
+function foodOSChecklistState(key){
+ const weekKey=foodOSWeekStartKey(),raw=foodOSRead(key,{});
+ return raw&&raw.weekKey===weekKey&&raw.checked&&typeof raw.checked==='object'?raw:{weekKey,checked:{},updatedAt:null};
+}
+function foodOSSaveChecklistState(key,state){state.updatedAt=new Date().toISOString();foodOSWrite(key,state);}
+function foodOSPrepItems(){
+ const counts=foodOSWeekRecipeCounts();
+ const lavash=counts['lavash-chicken']||0,ciabatta=counts['ciabatta-chicken']||0,chickenMeals=lavash+ciabatta;
+ const quesadilla=counts['quesadilla-v1']||0,pork=counts['pork-potatoes-v1']||0;
+ const ready=[];
+ if(counts.khinkali)ready.push(`хинкали ${counts.khinkali} × 450 г`);
+ if(counts['meat-lasagna'])ready.push(`лазанья ${counts['meat-lasagna']} × 500 г`);
+ if(counts['meat-pizza'])ready.push(`пицца ${counts['meat-pizza']} × 500 г`);
+ if(counts.solyanka)ready.push(`солянка ${counts.solyanka} × 500 г`);
+ const tests=[];
+ if(quesadilla)tests.push(`кесадилья ${quesadilla} набор: 200 г фарша + 120 г тортильи + 90 г моцареллы`);
+ if(pork)tests.push(`свинина ${pork} набор: 250 г шеи + 400 г картофельных долек`);
+ return [
+  {id:'chicken',title:`Курица: ${chickenMeals} порций по 220 г`,detail:`Приготовить ${foodOSNumber(chickenMeals*220/1000,2)} кг. Порции на первые 3 дня убрать в холодильник, остальные сразу заморозить.`},
+  {id:'cheese-sauces',title:'Сыр и соусы разложить по блюдам',detail:`Моцарелла: ${lavash} × 70 г для лаваша, ${ciabatta} × 80 г для чиабатты${quesadilla?`, ${quesadilla} × 90 г для кесадильи`:''}. Сырный и томатный соусы подписать по дням.`},
+  {id:'dry-mixes',title:'Собрать сухие порции на 7 дней',detail:'Гейнер: 14 × 60 г. Протеин: 7 × 30 г. Хлопья: 7 × 70 г. Креатин: 7 × 5 г.'},
+  {id:'ready-meals',title:'Разложить готовые и замороженные основные блюда',detail:ready.length?ready.join('; ')+'. Хранить замороженными до дня использования.':'Готовых замороженных блюд в текущем меню нет.'},
+  {id:'test-packs',title:'Собрать отдельные наборы для тестовых блюд',detail:tests.length?tests.join('; ')+'. Не готовить заранее — только собрать ингредиенты в один контейнер/пакет.':'Тестовых блюд в текущем меню нет.'},
+  {id:'labels',title:'Подписать всё по дням и срокам',detail:'На каждой порции указать блюдо, день, дату приготовления и крайний срок. Размораживать только в холодильнике.'}
+ ];
+}
+function foodOSRenderShoppingPrep(){
+ const shoppingRoot=document.getElementById('foodOSShoppingRoot'),prepRoot=document.getElementById('foodOSPrepRoot'),summary=document.getElementById('foodOSShoppingSummary');
+ if(!shoppingRoot||!prepRoot||!foodOSState)return;
+ const items=foodOSShoppingItems(),shoppingState=foodOSChecklistState(foodOSKeys.shopping);
+ const checkedCount=items.filter(item=>shoppingState.checked[item.key]).length;
+ if(summary)summary.innerHTML=`<span class="badge green">${checkedCount}/${items.length} куплено</span><span class="badge">неделя с ${escHtml(foodOSWeekStartKey())}</span>`;
+ shoppingRoot.innerHTML=`<div class="food-os-shopping-table"><div class="food-os-shopping-row head"><div></div><div>Продукт</div><div>Нужно по меню</div><div>Купить</div><div>Для каких блюд</div></div>${items.map(item=>{const done=!!shoppingState.checked[item.key],dishes=Object.entries(item.dishes).map(([title,count])=>`${title}${count>1?' ×'+count:''}`).join(', ');return `<label class="food-os-shopping-row ${done?'is-done':''}"><input class="food-os-shopping-check" type="checkbox" data-food-os-shopping="${escHtml(item.key)}" ${done?'checked':''}><div class="food-os-shopping-cell food-os-shopping-product">${escHtml(item.name)}</div><div class="food-os-shopping-cell"><span class="food-os-cell-label">Нужно</span>${escHtml(foodOSFormatNeed(item))}</div><div class="food-os-shopping-cell food-os-shopping-buy"><span class="food-os-cell-label">Купить</span>${escHtml(foodOSPurchaseText(item))}</div><div class="food-os-shopping-cell"><span class="food-os-cell-label">Для блюд</span>${escHtml(dishes)}</div></label>`;}).join('')}</div><div class="food-os-shopping-note"><b>Список конкретный:</b> количества взяты из граммовок всех пяти приёмов за семь дней. После изменения ингредиентов блюда список пересчитывается автоматически.</div>`;
+ shoppingRoot.querySelectorAll('[data-food-os-shopping]').forEach(box=>box.addEventListener('change',()=>{shoppingState.checked[box.dataset.foodOsShopping]=box.checked;if(!box.checked)delete shoppingState.checked[box.dataset.foodOsShopping];foodOSSaveChecklistState(foodOSKeys.shopping,shoppingState);foodOSRenderShoppingPrep();}));
+ const prepItems=foodOSPrepItems(),prepState=foodOSChecklistState(foodOSKeys.prep);
+ prepRoot.innerHTML=`<div class="food-os-prep-list">${prepItems.map(item=>{const done=!!prepState.checked[item.id];return `<label class="food-os-prep-item ${done?'is-done':''}"><input type="checkbox" data-food-os-prep="${escHtml(item.id)}" ${done?'checked':''}><div><b>${escHtml(item.title)}</b><span>${escHtml(item.detail)}</span></div></label>`;}).join('')}</div>`;
+ prepRoot.querySelectorAll('[data-food-os-prep]').forEach(box=>box.addEventListener('change',()=>{prepState.checked[box.dataset.foodOsPrep]=box.checked;if(!box.checked)delete prepState.checked[box.dataset.foodOsPrep];foodOSSaveChecklistState(foodOSKeys.prep,prepState);foodOSRenderShoppingPrep();}));
+}
+
 function foodOSRenderSettings(){const root=document.getElementById('foodOSSettingsRoot');if(!root)return;const s=foodOSState.settings,fields=[['heightCm','Рост, см','number'],['currentWeightKg','Текущий вес, кг','number'],['firstGoalKg','Первая цель, кг','number'],['nextGoal','Следующая цель','text'],['longGoal','Долгосрочная цель','text'],['caloriesTarget','Целевые калории','number'],['caloriesMin','Нижняя граница калорий','number'],['caloriesMax','Верхняя граница калорий','number'],['proteinTarget','Целевой белок, г','number'],['proteinMin','Нижняя граница белка, г','number'],['proteinMax','Верхняя граница белка, г','number']];root.innerHTML=`<div class="food-os-settings-grid">${fields.map(([k,l,t])=>`<div class="food-os-field"><label for="foodOSSetting_${k}">${escHtml(l)}</label><input class="food-os-input" id="foodOSSetting_${k}" data-food-os-setting="${k}" type="${t}" value="${escHtml(s[k])}"></div>`).join('')}</div><div class="food-os-actions"><button type="button" class="food-os-btn primary" id="foodOSSaveSettings">Сохранить настройки</button></div>`;document.getElementById('foodOSSaveSettings')?.addEventListener('click',()=>{root.querySelectorAll('[data-food-os-setting]').forEach(i=>{const k=i.dataset.foodOsSetting;foodOSState.settings[k]=i.type==='number'?Number(i.value):i.value;});foodOSState.settings.updatedAt=new Date().toISOString();foodOSWrite(foodOSKeys.settings,foodOSState.settings);foodOSRenderToday();foodOSRenderTodayCompact();});}
-function foodOSRenderRecipes(){const root=document.getElementById('foodOSRecipesRoot');if(!root)return;root.innerHTML=`<div class="food-os-recipe-grid">${foodOSState.recipes.map(r=>`<article class="food-os-recipe" id="food-os-recipe-${escHtml(r.id)}" data-food-os-recipe="${escHtml(r.id)}"><div class="food-os-field"><label>Название</label><input class="food-os-input" data-food-os-recipe-field="title" value="${escHtml(r.title)}"></div><div class="food-os-settings-grid" style="margin-top:8px"><div class="food-os-field"><label>Калории</label><input class="food-os-input" type="number" data-food-os-recipe-field="kcal" value="${Number(r.kcal)||0}"></div><div class="food-os-field"><label>Белок, г</label><input class="food-os-input" type="number" data-food-os-recipe-field="protein" value="${Number(r.protein)||0}"></div></div><div class="food-os-field" style="margin-top:8px"><label>Ингредиенты и граммы, по одному на строку</label><textarea class="food-os-input" data-food-os-recipe-field="ingredients">${escHtml((r.ingredients||[]).map(x=>`${x.name} — ${x.grams}`).join('\n'))}</textarea></div><div class="food-os-field" style="margin-top:8px"><label>Комментарий</label><textarea class="food-os-input" data-food-os-recipe-field="comment">${escHtml(r.comment||'')}</textarea></div><div class="food-os-actions"><button type="button" class="food-os-btn primary" data-food-os-save-recipe="${escHtml(r.id)}">Сохранить блюдо</button></div></article>`).join('')}</div>`;root.querySelectorAll('[data-food-os-save-recipe]').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('[data-food-os-recipe]'),recipe=foodOSRecipe(btn.dataset.foodOsSaveRecipe);if(!card||!recipe)return;card.querySelectorAll('[data-food-os-recipe-field]').forEach(i=>{const f=i.dataset.foodOsRecipeField;if(f==='ingredients')recipe.ingredients=foodOSParseIngredients(i.value);else if(f==='kcal'||f==='protein')recipe[f]=Number(i.value)||0;else recipe[f]=i.value;});foodOSWrite(foodOSKeys.recipes,foodOSState.recipes);foodOSRenderToday();foodOSRenderTodayCompact();foodOSRenderWeek();foodOSSyncSchedule();}));}
+function foodOSRenderRecipes(){const root=document.getElementById('foodOSRecipesRoot');if(!root)return;root.innerHTML=`<div class="food-os-recipe-grid">${foodOSState.recipes.map(r=>`<article class="food-os-recipe" id="food-os-recipe-${escHtml(r.id)}" data-food-os-recipe="${escHtml(r.id)}"><div class="food-os-field"><label>Название</label><input class="food-os-input" data-food-os-recipe-field="title" value="${escHtml(r.title)}"></div><div class="food-os-settings-grid" style="margin-top:8px"><div class="food-os-field"><label>Калории</label><input class="food-os-input" type="number" data-food-os-recipe-field="kcal" value="${Number(r.kcal)||0}"></div><div class="food-os-field"><label>Белок, г</label><input class="food-os-input" type="number" data-food-os-recipe-field="protein" value="${Number(r.protein)||0}"></div></div><div class="food-os-field" style="margin-top:8px"><label>Ингредиенты и граммы, по одному на строку</label><textarea class="food-os-input" data-food-os-recipe-field="ingredients">${escHtml((r.ingredients||[]).map(x=>`${x.name} — ${x.grams}`).join('\n'))}</textarea></div><div class="food-os-field" style="margin-top:8px"><label>Комментарий</label><textarea class="food-os-input" data-food-os-recipe-field="comment">${escHtml(r.comment||'')}</textarea></div><div class="food-os-actions"><button type="button" class="food-os-btn primary" data-food-os-save-recipe="${escHtml(r.id)}">Сохранить блюдо</button></div></article>`).join('')}</div>`;root.querySelectorAll('[data-food-os-save-recipe]').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('[data-food-os-recipe]'),recipe=foodOSRecipe(btn.dataset.foodOsSaveRecipe);if(!card||!recipe)return;card.querySelectorAll('[data-food-os-recipe-field]').forEach(i=>{const f=i.dataset.foodOsRecipeField;if(f==='ingredients')recipe.ingredients=foodOSParseIngredients(i.value);else if(f==='kcal'||f==='protein')recipe[f]=Number(i.value)||0;else recipe[f]=i.value;});foodOSWrite(foodOSKeys.recipes,foodOSState.recipes);foodOSRenderToday();foodOSRenderTodayCompact();foodOSRenderWeek();foodOSRenderShoppingPrep();foodOSSyncSchedule();}));}
 function foodOSScheduleItems(baseItems){const plan=foodOSGetDayPlan(),bySlot=Object.fromEntries(plan.map(x=>[x.slot,x])),mapping={'first-calories':'morning','meat-meal':'lunch','calorie-topup':'topup','dinner':'dinner'};const updated=baseItems.map(item=>{const slot=mapping[item.id],meal=slot?bySlot[slot]:null;if(!meal)return item;const cue=foodOSIsTraining()&&slot==='topup'?' · до тренировки':foodOSIsTraining()&&slot==='dinner'?' · после тренировки':'';return {...item,time:meal.time,title:meal.title,mini:`${meal.kcal} ккал · ${meal.protein} г белка${cue}`,actions:[`Открыть Food OS: ${meal.title}`,`${meal.kcal} ккал · ${meal.protein} г белка`],why:'Плановый приём Food OS.'};});const closing=bySlot.closing;if(closing&&!updated.some(x=>x.id==='closing-meal'))updated.push({id:'closing-meal',time:closing.time,title:closing.title,mini:`${closing.kcal} ккал · ${closing.protein} г белка`,actions:[`Открыть Food OS: ${closing.title}`,`${closing.kcal} ккал · ${closing.protein} г белка`],why:'Закрыть дневной белок и калории.'});return updated.sort((a,b)=>scheduleMinutes(a)-scheduleMinutes(b));}
 function foodOSScheduleDoneMap(){const d=foodOSDayProgress().done||{};return {'first-calories':!!d.morning,'meat-meal':!!d.lunch,'calorie-topup':!!d.topup,'dinner':!!d.dinner,'closing-meal':!!d.closing};}
 function foodOSSyncSchedule(){if(typeof renderDaySchedule==='function'&&document.getElementById('dayScheduleRoot'))renderDaySchedule();}
-function foodOSInit(){foodOSState=foodOSLoad();foodOSRenderToday();foodOSRenderTodayCompact();foodOSRenderWeek();foodOSRenderSettings();foodOSRenderRecipes();foodOSSyncSchedule();}
+function foodOSInit(){foodOSState=foodOSLoad();foodOSRenderToday();foodOSRenderTodayCompact();foodOSRenderWeek();foodOSRenderSettings();foodOSRenderRecipes();foodOSRenderShoppingPrep();foodOSSyncSchedule();}
 
 
 /* GitHub Pages production: daily timeline, mode override, deployment info and data backup. */
@@ -1524,7 +1725,7 @@ function ensureGithubControl(){const grid=document.querySelector('#control>.grid
 const _haalandOriginalUpdateCheckUI=updateCheckUI;updateCheckUI=function(){_haalandOriginalUpdateCheckUI();if(document.getElementById('dayScheduleRoot'))renderDaySchedule();};
 const _haalandOriginalSaveLog=saveLog;saveLog=function(){_haalandOriginalSaveLog();if(document.getElementById('dayScheduleRoot'))renderDaySchedule();};
 
-function init(){renderToday();renderQuick();renderRecipes();initRecipeFilters();renderWeek();renderTraining();renderExerciseGuide();initGuideNavigation();renderSpar();initChecks();initJournal();initHealth();initDaySchedule();ensureGithubControl();foodOSInit();document.getElementById('downloadRemindersBtn').onclick=downloadReminders;document.getElementById('testBrowserNotifyBtn').onclick=testNotification;}
+function init(){renderToday();renderQuick();renderRecipes();initRecipeFilters();renderWeek();renderTraining();renderExerciseGuide();initGuideNavigation();initChecks();initJournal();initHealth();initDaySchedule();ensureGithubControl();foodOSInit();document.getElementById('downloadRemindersBtn').onclick=downloadReminders;document.getElementById('testBrowserNotifyBtn').onclick=testNotification;}
 init();
 </script>
 <!-- v19.7 protected Exercise Guide technical-view hotfix: semantic views + distinct phases only -->
