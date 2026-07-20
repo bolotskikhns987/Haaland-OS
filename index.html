@@ -534,6 +534,55 @@ body .screen{display:none!important}#t1:checked~#today,#t2:checked~#food,#t3:che
 .exerciseAutoLoad{grid-column:1/-1;margin-top:3px;padding:10px 11px;border-radius:15px;background:linear-gradient(135deg,rgba(114,242,165,.065),rgba(120,169,255,.05));border:1px solid rgba(114,242,165,.17);min-width:0}.exerciseAutoLoad.blocked{background:rgba(255,114,128,.06);border-color:rgba(255,114,128,.22)}.exerciseLoadTop{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.exerciseLoadTitle{font-size:12px;font-weight:1000;line-height:1.35}.exerciseLoadSetup{margin-top:4px;color:#d8e5f4;font-size:11.5px;line-height:1.45;overflow-wrap:anywhere}.exerciseLoadProgress{margin-top:6px;color:var(--muted);font-size:10.8px;line-height:1.4}.exerciseLoadBadge{flex:0 0 auto;padding:5px 7px;border-radius:999px;background:rgba(114,242,165,.10);border:1px solid rgba(114,242,165,.22);font-size:9.5px;font-weight:1000;color:#d9fbe5;white-space:nowrap}.exerciseAutoLoad.blocked .exerciseLoadBadge{background:rgba(255,114,128,.09);border-color:rgba(255,114,128,.25);color:#ffd9dd}.exerciseResultButtons,.exerciseManualButtons{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.exerciseResultButtons button,.exerciseManualButtons button{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);color:var(--text);border-radius:11px;padding:7px 8px;font:inherit;font-size:10px;font-weight:900;cursor:pointer}.exerciseResultButtons button:hover,.exerciseManualButtons button:hover{border-color:rgba(114,242,165,.28)}.exerciseResultButtons button[data-load-result="success"]{background:rgba(114,242,165,.09);border-color:rgba(114,242,165,.22)}.exerciseResultButtons button[data-load-result="pain"]{background:rgba(255,114,128,.07);border-color:rgba(255,114,128,.22)}.exerciseLoadMessage{margin-top:7px;font-size:10.5px;line-height:1.4;color:#cbd8e8}.exerciseLoadMessage.good{color:#bdf6d1}.exerciseLoadMessage.warn{color:#ffe1a0}.exerciseLoadMessage.bad{color:#ffb2ba}.loadSummaryGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.loadSummaryItem{padding:11px;border-radius:15px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07);min-width:0}.loadSummaryItem b{display:block;font-size:12px;line-height:1.35}.loadSummaryItem span{display:block;margin-top:4px;color:var(--muted);font-size:10.5px;line-height:1.4}.exerciseGuideLoad{margin:0 0 10px}.trainingProgressLegend{margin-top:10px;padding:10px 11px;border-radius:14px;background:rgba(120,169,255,.055);border:1px solid rgba(120,169,255,.14);font-size:11.5px;line-height:1.45;color:#cbd8e8}
 @media(max-width:720px){.exerciseLoadTop{display:grid}.exerciseLoadBadge{justify-self:start}.exerciseResultButtons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.exerciseResultButtons button{min-height:38px}.loadSummaryGrid{grid-template-columns:1fr}}
 
+
+
+/* Bolot-Holand 2.0.3 — compact training UX */
+.trainingExerciseCompact{display:block!important;padding:12px 0!important;border-bottom:1px solid rgba(255,255,255,.07)!important;background:none!important;border-radius:0!important;margin:0!important}
+.trainingExerciseCompact:last-child{border-bottom:0!important}
+.exerciseCompactHead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.exerciseCompactTitle{min-width:0}
+.exerciseCompactTitle b{display:block;font-size:14px;line-height:1.35}
+.exerciseCompactMeta{margin-top:4px;color:var(--muted);font-size:11.5px;line-height:1.4}
+.exerciseLoadCompact{margin-top:8px;padding:9px 10px;border-radius:13px;background:rgba(114,242,165,.055);border:1px solid rgba(114,242,165,.15);min-width:0}
+.exerciseLoadCompact.blocked{background:rgba(255,114,128,.055);border-color:rgba(255,114,128,.2)}
+.exerciseLoadCompactGrid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.8fr);gap:10px;align-items:start}
+.exerciseLoadCompactItem{min-width:0}
+.exerciseLoadCompactItem span{display:block;font-size:9px;font-weight:1000;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.exerciseLoadCompactItem b{display:block;font-size:11.5px;line-height:1.42;overflow-wrap:anywhere}
+.exerciseLoadCompactItem.next b{color:#c9f6d9}
+.exerciseLoadCompact.blocked .exerciseLoadCompactItem.next b{color:#ffb6bd}
+.exerciseResultDetails{margin:7px 0 0!important;padding:0!important;border:0!important;background:none!important;border-radius:0!important}
+.exerciseResultDetails>summary{display:inline-flex!important;align-items:center;gap:6px;padding:6px 8px;border-radius:10px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.035);font-size:10.5px!important;font-weight:900!important;color:#dfe9f8;list-style:none}
+.exerciseResultDetails>summary::-webkit-details-marker{display:none}
+.exerciseResultDetails[open]>summary{padding-bottom:6px!important;border-bottom:1px solid rgba(255,255,255,.09)!important}
+.exerciseResultPanel{padding-top:8px}
+.exerciseResultButtons.compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:0}
+.exerciseResultButtons.compact button{min-height:36px;font-size:10px;padding:7px 8px}
+.exerciseManualDetails{margin:7px 0 0!important;padding:0!important;border:0!important;background:none!important}
+.exerciseManualDetails>summary{font-size:10px!important;color:var(--muted);font-weight:800!important}
+.exerciseManualDetails .exerciseManualButtons{margin-top:6px}
+.exerciseLastMessage{margin-top:7px;font-size:10px;line-height:1.4;color:var(--muted)}
+.exerciseLastMessage.good{color:#bdf6d1}.exerciseLastMessage.warn{color:#ffe1a0}.exerciseLastMessage.bad{color:#ffb2ba}
+.trainingCompactIntro{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.trainingCompactIntro .small{max-width:720px}
+.trainingCompactCard{padding:13px!important}
+.equipmentCompactFacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.equipmentCompactFact{padding:10px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.equipmentCompactFact span{display:block;font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.equipmentCompactFact b{display:block;margin-top:4px;font-size:12px;line-height:1.4}
+.equipmentCompactDetails{margin-top:9px!important}
+.equipmentCompactDetails>summary{font-size:13px}
+.equipmentCompactDetails .equipmentWeightChips{margin-top:10px}
+.equipmentCompactDetails .equipmentLoadGrid{margin-top:10px}
+.exerciseGuideLoad .exerciseResultDetails{display:none}
+.exerciseGuideLoad{margin:0 0 9px!important}
+@media(max-width:700px){
+ .exerciseLoadCompactGrid{grid-template-columns:1fr}
+ .exerciseLoadCompactItem.next{padding-top:7px;border-top:1px solid rgba(255,255,255,.06)}
+ .equipmentCompactFacts{grid-template-columns:1fr}
+ .trainingCompactIntro{align-items:flex-start;flex-direction:column}
+}
+
 </style>
 </head>
 <body>
@@ -634,7 +683,7 @@ body .screen{display:none!important}#t1:checked~#today,#t2:checked~#food,#t3:che
     <div class="ux-page-head"><div><span class="ux-eyebrow">Настройки и справочники</span><h2>Ещё</h2><p>Редко используемые функции не конкурируют с действиями дня.</p></div></div>
     <div class="grid cols2">
       <div class="card"><h2>Напоминания</h2><div class="small muted">Календарь и проверка браузерных уведомлений.</div><div class="actionRow"><button class="mainBtn" id="downloadRemindersBtn">Скачать .ics</button><button class="secondaryBtn" id="testBrowserNotifyBtn">Тест уведомления</button></div></div>
-      <div class="card"><h2>О приложении</h2><div class="ux-kv"><span>Версия интерфейса</span><b>Bolot-Holand 2.0.1</b></div><div class="ux-kv"><span>Архитектура</span><b>Course Engine</b></div><div class="ux-kv"><span>Хранение</span><b>локально в браузере</b></div></div>
+      <div class="card"><h2>О приложении</h2><div class="ux-kv"><span>Версия интерфейса</span><b>Bolot-Holand 2.0.3 Compact</b></div><div class="ux-kv"><span>Архитектура</span><b>Course Engine</b></div><div class="ux-kv"><span>Хранение</span><b>локально в браузере</b></div></div>
     </div>
     <details class="card ux-disclosure" style="margin-top:12px"><summary><span>Добавки и позиции</span><small>полный справочник</small></summary><div class="ux-disclosure-body">
     <div class="suppStack">
@@ -2116,11 +2165,74 @@ renderTrainingEquipment=function(){const root=document.getElementById('trainingE
  document.getElementById('equipmentCalculateBtn').onclick=bhEquipmentLoadResult;document.getElementById('equipmentLoadMode').onchange=bhEquipmentLoadResult;document.getElementById('equipmentTargetWeight').oninput=bhEquipmentLoadResult;document.getElementById('equipmentBarBase').oninput=bhEquipmentLoadResult;document.getElementById('equipmentDumbbellBase').oninput=bhEquipmentLoadResult;document.getElementById('equipmentMaxPlatesSide').oninput=bhEquipmentLoadResult;document.getElementById('equipmentSaveBaseBtn').onclick=()=>{const next=bhEquipmentLoad();next.adjustableSet.barbellBaseKg=Math.max(1,Number(document.getElementById('equipmentBarBase').value)||6.1);next.adjustableSet.dumbbellBaseKg=Math.max(1,Number(document.getElementById('equipmentDumbbellBase').value)||2.24);next.adjustableSet.maxPlatesPerSideConfirmed=Math.max(1,Math.min(5,Math.round(Number(document.getElementById('equipmentMaxPlatesSide').value)||2)));bhEquipmentSave(next);bhTrainingLoadsCache=null;bhRefreshTrainingViews();};bhEquipmentLoadResult();};
 
 
+
+
+/* Bolot-Holand 2.0.3 — compact training UX overrides */
+function bhCompactNextStep(id){
+ const row=bhFindExerciseRow(id),parsed=bhParseRepRange(row?.[1]),state=bhLoadStateFor(id),profile=BH_LOAD_PROFILES[id];
+ if(!state||!profile)return 'По технике и самочувствию';
+ if(state.blocked)return 'Стоп: сначала снять ограничение по боли';
+ if(parsed&&parsed.kind==='reps'&&state.targetReps<parsed.max)return `Запас → ${parsed.sets}×${state.targetReps+1}${parsed.suffix}`;
+ const configs=bhLoadConfigs(profile),nextCfg=configs[Math.min(configs.length-1,state.configIndex+1)];
+ if(state.configIndex>=configs.length-1){
+  if(profile.mode==='bodyweight')return 'Запас → добавить повтор или усложнить вариант';
+  return 'Текущий безопасный максимум';
+ }
+ let next='следующий уровень';
+ if(profile.mode==='barbell')next=`${foodOSNumber(nextCfg.total,2)} кг`;
+ else if(profile.mode==='pair')next=`по ${foodOSNumber(nextCfg.total,2)} кг`;
+ else if(profile.mode==='single')next=`${foodOSNumber(nextCfg.total,2)} кг`;
+ else next=nextCfg.parts;
+ const need=Math.max(1,2-(Number(state.topStreak)||0));
+ return `${need===1?'Ещё 1 раз':'2 раза'} с запасом → ${next}`;
+}
+function bhExerciseLoadHtml(id,interactive=false){
+ if(!id)return '';
+ const fmt=bhLoadFormat(id),state=fmt.state,profile=fmt.profile,blocked=!!state?.blocked;
+ const lastMessage=state?.lastFeedbackDate&&state?.message?`<div class="exerciseLastMessage ${escHtml(state.messageTone||'')}">${escHtml(state.message)}</div>`:'';
+ return `<div class="exerciseLoadCompact ${blocked?'blocked':''}" data-load-card="${escHtml(id)}"><div class="exerciseLoadCompactGrid"><div class="exerciseLoadCompactItem"><span>Сборка</span><b>${escHtml(fmt.setup)}</b></div><div class="exerciseLoadCompactItem next"><span>Следующий шаг</span><b>${escHtml(bhCompactNextStep(id))}</b></div></div>${interactive&&profile?`<details class="exerciseResultDetails"><summary>Записать результат</summary><div class="exerciseResultPanel"><div class="exerciseResultButtons compact"><button type="button" data-load-result="success" data-load-id="${escHtml(id)}">✓ Есть запас</button><button type="button" data-load-result="hard" data-load-id="${escHtml(id)}">≈ На пределе</button><button type="button" data-load-result="fail" data-load-id="${escHtml(id)}">↓ Не добил</button><button type="button" data-load-result="pain" data-load-id="${escHtml(id)}">! Боль</button></div>${lastMessage}<details class="exerciseManualDetails"><summary>Ручная корректировка</summary><div class="exerciseManualButtons"><button type="button" data-load-step="-1" data-load-id="${escHtml(id)}">Вес −</button><button type="button" data-load-step="1" data-load-id="${escHtml(id)}" ${blocked?'disabled':''}>Вес +</button>${blocked?`<button type="button" data-load-unblock data-load-id="${escHtml(id)}">Снять блок</button>`:''}</div></details></div></details>`:(blocked?`<div class="exerciseLastMessage bad">Прогрессия остановлена из-за боли.</div>`:'')}</div>`;
+}
+function bhWorkoutRowsHtml(rows,guideDay,withLinks=true,interactive=false){
+ return rows.map(row=>`<div class="ex trainingExerciseCompact"><div class="exerciseCompactHead"><div class="exerciseCompactTitle"><b>${escHtml(bhExerciseName(row))}</b><div class="exerciseCompactMeta">${escHtml(bhCurrentPrescription(row))}${row[2]?` · ${escHtml(row[2])}`:''}</div></div>${withLinks&&row[3]?`<button class="miniGuideBtn" type="button" data-guide-exercise="${escHtml(row[3])}" data-guide-day="${guideDay||''}">техника</button>`:''}</div>${row[3]?bhExerciseLoadHtml(row[3],interactive):''}</div>`).join('');
+}
+renderTraining=function(){
+ const weekday=new Date().getDay();
+ document.getElementById('trainingPlan').innerHTML=[1,2,3,4,5,6,0].map(k=>{const d=trainingData[k],guideDay=GUIDE_DAY_BY_WEEKDAY[k];return `<details ${k===weekday?'open':''}><summary>${escHtml(d.name)}</summary><div class="small muted" style="margin:8px 0">${escHtml(d.focus)}</div>${bhWorkoutRowsHtml(d.workout,guideDay,true,false)}${guideDay?`<button class="secondaryBtn guideBtn" type="button" data-guide-day="${guideDay}" style="margin-top:10px">Открыть всю технику</button>`:''}</details>`}).join('');
+};
+renderTrainingToday=function(){
+ const root=document.getElementById('trainingTodayRoot');if(!root)return;
+ const weekday=new Date().getDay(),d=trainingData[weekday]||trainingData[0],scaled=bhScaledWorkout(d,weekday),adapt=scaled.adapt,guideDay=GUIDE_DAY_BY_WEEKDAY[weekday];
+ root.innerHTML=`<div class="card trainingCompactCard"><div class="trainingCompactIntro"><div><span class="ux-eyebrow">Сегодня</span><h2 style="margin:4px 0">${escHtml(d.name)}</h2><div class="small muted">${escHtml(d.focus)}</div></div><span class="badge ${adapt.tone==='bad'?'bad':adapt.tone==='warn'?'warn':'green'}">${scaled.scale}% объёма</span></div><div class="ux-adaptation ${adapt.tone}" style="margin:8px 0 4px"><div><b>${escHtml(adapt.title)}</b><span>${escHtml(adapt.text)}</span></div></div>${bhWorkoutRowsHtml(scaled.rows,guideDay,true,true)}<div class="actionRow"><button class="secondaryBtn" type="button" id="openTodayTechnique">Техника</button><button class="secondaryBtn" type="button" id="openEquipmentTab">Инвентарь</button></div></div>`;
+ bhBindLoadActions(root);
+ document.getElementById('openTodayTechnique').onclick=()=>uxSelectPane('training','training-technique');
+ document.getElementById('openEquipmentTab').onclick=()=>uxSelectPane('training','training-equipment');
+ const badge=document.getElementById('trainingCourseBadge');if(badge){badge.textContent=scaled.scale+'% объёма';badge.className='badge '+(scaled.scale===0?'bad':scaled.scale<100?'warn':'green');}
+};
+function bhInjectExerciseLoadCards(){
+ document.querySelectorAll('.exerciseCard[id^="exercise-"]').forEach(card=>{const id=card.id.replace(/^exercise-/,'');const body=card.querySelector('.exerciseBody');if(!body)return;body.querySelector('.exerciseGuideLoad')?.remove();const wrap=document.createElement('div');wrap.className='exerciseGuideLoad';wrap.innerHTML=bhExerciseLoadHtml(id,false);body.prepend(wrap);});
+}
+renderTrainingEquipment=function(){
+ const root=document.getElementById('trainingEquipmentRoot');if(!root)return;
+ const state=bhEquipmentLoad(),set=state.adjustableSet,barConfigs=bhBarbellConfigs(Number(set.barbellBaseKg)||6.1,Number(set.maxPlatesPerSideConfirmed)||2),pairConfigs=bhPairDumbbellConfigs(Number(set.dumbbellBaseKg)||2.24),singleConfigs=bhSingleDumbbellConfigs(Number(set.dumbbellBaseKg)||2.24,false,Number(set.maxPlatesPerSideConfirmed)||2);
+ root.innerHTML=`<div class="card"><span class="ux-eyebrow">Рабочий комплект</span><h2 style="margin:5px 0 0">Гантели, штанга и резинки</h2><div class="equipmentCompactFacts"><div class="equipmentCompactFact"><span>Пустая штанга</span><b>${foodOSNumber(set.barbellBaseKg,2)} кг</b></div><div class="equipmentCompactFact"><span>Пустая гантель</span><b>${foodOSNumber(set.dumbbellBaseKg,2)} кг</b></div><div class="equipmentCompactFact"><span>Диски</span><b>${set.plates.map(x=>`${x.kg} кг × ${x.count}`).join(' · ')}</b></div></div><div class="equipmentTags" style="margin-top:10px">${state.bands.mini.map(x=>`<span class="equipmentTag band">Mini-band ${escHtml(x)}</span>`).join('')}<span class="equipmentTag band">${escHtml(state.bands.longLoop)}</span></div></div>
+ <details class="card equipmentCompactDetails"><summary>Калькулятор и параметры сборки</summary><div class="equipmentLoadGrid"><div class="inputBox"><label>Режим</label><select id="equipmentLoadMode"><option value="barbell">Сборная штанга</option><option value="pair">Равная пара гантелей</option><option value="single">Одна гантель</option></select></div><div class="inputBox"><label>Целевой вес, кг</label><input id="equipmentTargetWeight" type="number" min="0" step="0.25" value="${String(barConfigs[Math.min(2,barConfigs.length-1)]?.total||11.1)}"></div><div class="inputBox"><label>Пустая штанга, кг</label><input id="equipmentBarBase" type="number" min="1" step="0.01" value="${set.barbellBaseKg}"></div><div class="inputBox"><label>Пустая гантель, кг</label><input id="equipmentDumbbellBase" type="number" min="1" step="0.01" value="${set.dumbbellBaseKg}"></div><div class="inputBox"><label>Дисков на сторону</label><input id="equipmentMaxPlatesSide" type="number" min="1" max="5" step="1" value="${set.maxPlatesPerSideConfirmed||2}"></div><button class="mainBtn" id="equipmentCalculateBtn" type="button">Рассчитать</button></div><div id="equipmentLoadResult" class="equipmentResult"></div><div class="actionRow"><button class="secondaryBtn" id="equipmentSaveBaseBtn" type="button">Сохранить параметры</button></div></details>
+ <details class="card equipmentCompactDetails"><summary>Все доступные веса</summary><div class="equipmentWeightChips"><span class="small muted">Штанга:</span>${barConfigs.map(x=>`<span class="equipmentWeightChip">${foodOSNumber(x.total,2)} кг${x.verified?'':'*'}</span>`).join('')}</div><div class="equipmentWeightChips"><span class="small muted">Равная пара:</span>${pairConfigs.map(x=>`<span class="equipmentWeightChip">${foodOSNumber(x.total,2)} кг</span>`).join('')}</div><div class="equipmentWeightChips"><span class="small muted">Одна гантель:</span>${singleConfigs.map(x=>`<span class="equipmentWeightChip">${foodOSNumber(x.total,2)} кг${x.verified?'':'*'}</span>`).join('')}</div></details>
+ <details class="card equipmentCompactDetails"><summary>Остальной инвентарь и безопасность</summary><div class="equipmentTags" style="margin-top:10px">${state.existing.map(x=>`<span class="equipmentTag">${escHtml(x)}</span>`).join('')}</div><div class="equipmentSafety" style="margin-top:10px"><div>Перед подходом проверить соединитель и резьбовые замки.</div><div>Собранную штангу не бросать.</div><div>Сборки со звёздочкой не используются автоматически до проверки посадки.</div></div></details>`;
+ document.getElementById('equipmentCalculateBtn').onclick=bhEquipmentLoadResult;
+ document.getElementById('equipmentLoadMode').onchange=bhEquipmentLoadResult;
+ document.getElementById('equipmentTargetWeight').oninput=bhEquipmentLoadResult;
+ document.getElementById('equipmentBarBase').oninput=bhEquipmentLoadResult;
+ document.getElementById('equipmentDumbbellBase').oninput=bhEquipmentLoadResult;
+ document.getElementById('equipmentMaxPlatesSide').oninput=bhEquipmentLoadResult;
+ document.getElementById('equipmentSaveBaseBtn').onclick=()=>{const next=bhEquipmentLoad();next.adjustableSet.barbellBaseKg=Math.max(1,Number(document.getElementById('equipmentBarBase').value)||6.1);next.adjustableSet.dumbbellBaseKg=Math.max(1,Number(document.getElementById('equipmentDumbbellBase').value)||2.24);next.adjustableSet.maxPlatesPerSideConfirmed=Math.max(1,Math.min(5,Math.round(Number(document.getElementById('equipmentMaxPlatesSide').value)||2)));bhEquipmentSave(next);bhTrainingLoadsCache=null;bhRefreshTrainingViews();};
+ bhEquipmentLoadResult();
+};
+
 function init(){renderToday();renderQuick();renderRecipes();initRecipeFilters();renderWeek();renderTraining();renderExerciseGuide();initGuideNavigation();initChecks();initJournal();initHealth();initDaySchedule();ensureGithubControl();foodOSInit();uxV2Init();document.getElementById('downloadRemindersBtn').onclick=downloadReminders;document.getElementById('testBrowserNotifyBtn').onclick=testNotification;}
 init();
 </script>
 <!-- v19.7 protected Exercise Guide technical-view hotfix: semantic views + distinct phases only -->
 <!-- v19.9 Exercise Atlas refactor: static atlas visualization only; protected modules preserved -->
 <!-- v20 final release-pass: clean Exercise Guide UI; protected modules preserved -->
-<!-- Bolot-Holand 2.0.2 production build: Logic Sync + exact plate prescriptions + double progression -->
+<!-- Bolot-Holand 2.0.3 Compact VERIFIED: assembly + next step + collapsed feedback -->
 </body></html>
