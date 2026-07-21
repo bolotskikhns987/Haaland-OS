@@ -1,3 +1,4 @@
+# Trigger PR validation after base workflow installation
 name: Build exact visual release
 on:
   push:
