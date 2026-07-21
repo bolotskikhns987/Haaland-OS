@@ -2,18 +2,19 @@ name: Build fixed index
 on:
   push:
     branches: [chatgpt-build-fixed-index-20260721]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: write
 jobs:
   build:
-    if: "!contains(github.event.head_commit.message, 'Apply corrected index artifact')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: chatgpt-build-fixed-index-20260721
-      - name: Remove premature script closing tag
+      - name: Ensure corrected script structure
         shell: python
         run: |
           from pathlib import Path
@@ -21,9 +22,14 @@ jobs:
           s = p.read_text(encoding='utf-8')
           broken = "})();\n</script>\n\nfunction init(){"
           fixed = "})();\n\nfunction init(){"
-          if s.count(broken) != 1:
-              raise SystemExit(f'Expected exactly one broken marker, found {s.count(broken)}')
-          p.write_text(s.replace(broken, fixed, 1), encoding='utf-8')
+          count = s.count(broken)
+          if count > 1:
+              raise SystemExit(f'Unexpected broken marker count: {count}')
+          if count == 1:
+              s = s.replace(broken, fixed, 1)
+              p.write_text(s, encoding='utf-8')
+          elif fixed not in s:
+              raise SystemExit('Neither broken nor corrected init marker found')
       - name: Validate corrected structure
         shell: python
         run: |
@@ -38,10 +44,8 @@ jobs:
           Path('/tmp/app.js').write_text('\n'.join(blocks), encoding='utf-8')
       - name: JavaScript syntax check
         run: node --check /tmp/app.js
-      - name: Commit corrected file to temporary branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Apply corrected index artifact"
-          git push origin HEAD:chatgpt-build-fixed-index-20260721
+      - uses: actions/upload-artifact@v4
+        with:
+          name: haaland-os-fixed-index
+          path: index.html
+          if-no-files-found: error
