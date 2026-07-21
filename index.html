@@ -3226,4 +3226,81 @@ init();
 <!-- Bolot-Holand 2.3 Focus Motion: deduplicated Today + animated food + animated exercise mechanics -->
 <!-- Bolot-Holand 2.7 Release: contextual actions, preview-safe storage, photo-reference atlas for all exercises -->
 <!-- Bolot-Holland 2.7 FINAL VERIFIED -->
+
+<style id="bh30-visual-style">
+.bh30-visual .r26-scene{min-height:500px;background:radial-gradient(circle at 42% 40%,#0f2432 0%,#06111a 44%,#010407 100%);box-shadow:inset 0 0 90px rgba(36,230,208,.03),0 18px 42px rgba(0,0,0,.32)}
+.bh30-visual .r26-scene:before{background:linear-gradient(90deg,transparent 0,rgba(36,230,208,.025) 48%,transparent 78%)}
+.bh30-visual .r26-scene-label,.bh30-visual .r26-muscle-chips,.bh30-visual .r26-phase,.bh30-visual .r26-cue{display:none!important}
+.bh30-visual .r26-map{right:12px;top:50%;transform:translateY(-50%);width:132px;padding:0;border:0;background:transparent;box-shadow:none}
+.bh30-visual .r26-map svg{min-height:220px;filter:drop-shadow(0 0 14px rgba(36,230,208,.06))}
+.bh30-visual .r26-map b,.bh30-visual .r26-map span{display:none!important}
+.bh30-visual .r26-hero-svg{display:block;width:100%;height:auto;min-height:500px}
+.bh30-visual .r26-work{filter:drop-shadow(0 18px 24px rgba(0,0,0,.42)) saturate(.98) contrast(1.02)}
+.bh30-visual .r26-ghost{opacity:.16;filter:blur(.2px) saturate(.55) grayscale(.1)}
+.bh30-visual .r26-photo img{display:block;width:100%;height:100%;min-height:500px;object-fit:contain;object-position:center bottom;background:radial-gradient(circle at 42% 40%,#0f2432 0%,#06111a 44%,#010407 100%)}
+.bh30-note{margin-top:10px;padding:9px 12px;border-radius:14px;border:1px solid rgba(155,205,239,.12);background:rgba(5,12,21,.72);font-size:11px;line-height:1.45;color:#cfe0ee}
+@media(max-width:700px){.bh30-visual .r26-scene,.bh30-visual .r26-hero-svg,.bh30-visual .r26-photo img{min-height:360px}.bh30-visual .r26-map{width:98px;right:8px}.bh30-visual .r26-map svg{min-height:165px}}
+</style>
+<script id="bh30-visual-script">
+(function(){
+  const h=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const exById=id=>(window.EXERCISES||[]).find(e=>e.id===id);
+  const clean=s=>String(s||'').replace(/<circle class="anatomy-joint"[^>]*\/>/g,'').replace(/<circle class="anatomy-joint-ring"[^>]*\/>/g,'');
+  const FRONT=new Set(['pull-up','chin-up','dead-hang','hanging-leg-raise','db-overhead-press','lateral-raise','band-face-pull','db-biceps-curl','triceps-extension']);
+  const LOW=new Set(['feet-elevated-push-up','hip-thrust','sliding-leg-curl','copenhagen-plank','floor-db-press','incline-board-abs']);
+  const HANG=new Set(['pull-up','chin-up','dead-hang','hanging-leg-raise','dips']);
+  const SMALL=new Set(['standing-calf-raise','lateral-raise','db-biceps-curl','triceps-extension','band-face-pull']);
+  function poseMarkup29(e,phase='end',forceFront=false){
+    if(!e||typeof atlasPose!=='function'||typeof bodySvgForAngle!=='function') return '';
+    try{
+      const pose=atlasPose(e,phase);
+      const angle=forceFront?'front':(FRONT.has(e.id)?'front':'side');
+      const equipment=forceFront?'':(typeof atlasEquipment==='function'?atlasEquipment(e,pose):'');
+      return clean(`${equipment}${bodySvgForAngle(pose,e.main||[],e.assist||[],angle)}`);
+    }catch(err){console.warn('BH30 pose',e?.id,err);return '';}
+  }
+  function geom(e){
+    if(HANG.has(e.id)) return {ghost:'translate(120 72) scale(1.14)',work:'translate(198 46) scale(1.35)',floor:false};
+    if(LOW.has(e.id)) return {ghost:'translate(26 168) scale(1.08)',work:'translate(92 110) scale(1.26)',floor:true};
+    if(SMALL.has(e.id)) return {ghost:'translate(62 106) scale(1.25)',work:'translate(126 76) scale(1.47)',floor:true};
+    return {ghost:'translate(44 98) scale(1.22)',work:'translate(108 66) scale(1.52)',floor:true};
+  }
+  function heroSvg(e){
+    const start=poseMarkup29(e,'start',false);
+    const work=poseMarkup29(e,'end',false)||start;
+    const g=geom(e);
+    return `<svg class="r26-hero-svg" viewBox="0 0 780 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${h(e.name)} — визуализация упражнения"><defs><radialGradient id="bg-${h(e.id)}" cx="42%" cy="40%" r="74%"><stop offset="0" stop-color="#173344"/><stop offset=".48" stop-color="#07131d"/><stop offset="1" stop-color="#010407"/></radialGradient><linearGradient id="floor-${h(e.id)}" x1="0" x2="1"><stop stop-color="#0a1622" stop-opacity="0"/><stop offset=".5" stop-color="#315166" stop-opacity=".46"/><stop offset="1" stop-color="#0a1622" stop-opacity="0"/></linearGradient></defs><rect width="780" height="500" fill="url(#bg-${h(e.id)})"/>${g.floor?'<ellipse cx="334" cy="438" rx="288" ry="28" fill="url(#floor-'+h(e.id)+')"/>':''}<g class="r26-ghost" transform="${g.ghost}">${start}</g><g class="r26-work" transform="${g.work}">${work}</g></svg>`;
+  }
+  function mapSvg(e){
+    const map=poseMarkup29(e,'end',true)||poseMarkup29(e,'start',true)||'';
+    return `<aside class="r26-map"><svg viewBox="0 0 260 220" aria-hidden="true">${map}</svg></aside>`;
+  }
+  function visualHtml29(e){
+    if(!e) return `<div class="r26-card-visual bh30-visual"><div class="r26-scene"></div></div>`;
+    if(e.id==='bulgarian-split-squat' && window.__BH_BULGARIAN_VISUAL){
+      return `<div class="r26-card-visual bh30-visual"><div class="r26-scene r26-photo"><img src="${window.__BH_BULGARIAN_VISUAL}" alt="${h(e.name)}">${mapSvg(e)}</div><div class="bh30-note">${h(e.visualCue||'Передняя стопа достаточно далеко; колено движется по линии носка, толчок — передней ногой.')}</div></div>`;
+    }
+    return `<div class="r26-card-visual bh30-visual"><div class="r26-scene">${heroSvg(e)}${mapSvg(e)}</div><div class="bh30-note">${h(e.visualCue||'Контролируй траекторию, дыхание и безопасную амплитуду без боли.')}</div></div>`;
+  }
+  function loadData(id){if(!id||typeof bhLoadFormat!=='function')return {setup:'По плану',next:'По технике и самочувствию',state:{}};const f=bhLoadFormat(id)||{};return {setup:f.setup||'По плану',next:typeof bhCompactNextStep==='function'?bhCompactNextStep(id):(f.next||'По технике и самочувствию'),state:f.state||{}};}
+  function loadHtml(id){const l=loadData(id);return `<div class="r26-load-grid"><div class="r26-load"><div class="r26-load-icon">⛁</div><div><b>Сборка</b><span>${h(l.setup)}</span></div></div><div class="r26-load"><div class="r26-load-icon">↗</div><div><b>Следующий шаг</b><span><strong>${h(l.next)}</strong></span></div></div></div>`;}
+  function feedbackHtml(id){if(!id)return '';const blocked=!!loadData(id).state.blocked;return `<div class="release-feedback"><button type="button" class="success" data-load-result="success" data-load-id="${h(id)}">✓ С запасом</button><button type="button" class="hard" data-load-result="hard" data-load-id="${h(id)}">ϟ Тяжело</button></div><details class="release-more"><summary>Другой результат или ручная корректировка</summary><div class="release-more-body"><button type="button" data-load-result="fail" data-load-id="${h(id)}">Не добил</button><button type="button" data-load-result="pain" data-load-id="${h(id)}">Боль</button><button type="button" data-load-step="-1" data-load-id="${h(id)}">Вес −</button><button type="button" data-load-step="1" data-load-id="${h(id)}" ${blocked?'disabled':''}>Вес +</button>${blocked?`<button type="button" data-load-unblock data-load-id="${h(id)}">Снять блок</button>`:''}</div></details>`;}
+  function rowName(row){return typeof bhExerciseName==='function'?bhExerciseName(row):(row?.[0]||'Упражнение');}
+  function rowPrescription(row){return typeof bhCurrentPrescription==='function'?(bhCurrentPrescription(row)||row?.[1]||''):(row?.[1]||'');}
+  function rowEquipment(row){return typeof bhExerciseEquipment==='function'?bhExerciseEquipment(row):(row?.[2]||'—');}
+  function trainingCard(row,index,guideDay,open){const id=row?.[3]||'',e=exById(id),note=row?.[2]||'';return `<details class="release-exercise" ${open?'open':''}><summary><div class="release-exercise-row"><div class="release-index">${index+1}</div><div class="release-exercise-name"><b>${h(rowName(row))}</b><span>${h(rowPrescription(row))}</span></div><div class="release-equipment">${h(rowEquipment(row)||'—')}</div><div class="release-chevron">⌄</div></div></summary><div class="release-exercise-body">${visualHtml29(e)}${loadHtml(id)}${feedbackHtml(id)}${note?`<div class="release-note">${h(note)}</div>`:''}<div class="release-card-actions">${id?`<button class="secondaryBtn" type="button" data-guide-exercise="${h(id)}" data-guide-day="${h(guideDay||'')}">Полная техника</button>`:''}<button class="secondaryBtn" type="button" data-r26-pane="training-equipment">Инвентарь</button></div></div></details>`;}
+  function renderTrainingToday29(){const root=document.getElementById('trainingTodayRoot');if(!root)return;const weekday=new Date().getDay(),day=trainingData[weekday]||trainingData[0],scaled=typeof bhScaledWorkout==='function'?bhScaledWorkout(day,weekday):{rows:day.workout||[],scale:100},rows=scaled.rows||[],guideDay=GUIDE_DAY_BY_WEEKDAY[weekday]||'',first=rows.find(r=>r?.[3])||rows[0],firstId=first?.[3]||'',load=loadData(firstId);root.innerHTML=`<div class="release-training"><header class="release-training-head"><div class="release-brand">BOLOT-<em>HOLAND</em></div><div class="release-training-title">${h(day.name)}</div><div class="release-training-meta"><span>${h(first?rowEquipment(first):'по плану')}</span><span class="divider">|</span><span>Рабочая сборка: <strong>${h(load.setup)}</strong></span><span class="divider">|</span><span><strong>${scaled.scale}% объёма</strong></span></div><div class="release-training-next">Следующий шаг: <strong>${h(load.next)}</strong></div></header><div class="release-exercises">${rows.map((row,i)=>trainingCard(row,i,guideDay,i===0)).join('')}</div></div>`;if(typeof bhBindLoadActions==='function')bhBindLoadActions(root);root.querySelectorAll('[data-r26-pane]').forEach(b=>b.addEventListener('click',()=>{const tab=document.getElementById('t4');if(tab){tab.checked=true;tab.dispatchEvent(new Event('change',{bubbles:true}));}setTimeout(()=>typeof uxSelectPane==='function'&&uxSelectPane('training',b.dataset.r26Pane),0);}));const badge=document.getElementById('trainingCourseBadge');if(badge){badge.textContent=`${scaled.scale}% объёма`;badge.className='badge '+(scaled.scale===0?'bad':scaled.scale<100?'warn':'green');}}
+  function renderExerciseCard29(e){const flags=typeof redFlagsFor==='function'?redFlagsFor(e):[];return `<details class="release-guide-card exerciseCard anchor" id="exercise-${h(e.id)}"><summary>${h(e.name)}</summary><div class="release-guide-body">${loadHtml(e.id)}${visualHtml29(e)}<details class="guideSub" open><summary>Техника по шагам</summary><ol>${(e.steps||[]).map(x=>`<li>${h(x)}</li>`).join('')}</ol><p><b>Дыхание:</b> ${h(e.breath||'')}</p></details><details class="guideSub"><summary>Чекпоинты правильности</summary><ul>${(e.checkpoints||[]).map(x=>`<li>${h(x)}</li>`).join('')}</ul></details><details class="guideSub"><summary>Частые ошибки</summary><div class="errorList">${(e.errors||[]).map(x=>`<div class="errorItem"><b>${h(x[0])}</b><br>${h(x[1])}</div>`).join('')}</div></details><details class="guideSub"><summary>Безопасность и красные флаги</summary><div class="redFlags">${flags.map(x=>`<div class="redFlagItem">${h(x)}</div>`).join('')}</div><div class="guidePanel" style="margin-top:8px"><b>Безопасная амплитуда</b>${h(e.safety||'')}</div></details><details class="guideSub"><summary>Упрощение / стандарт / усложнение</summary><div class="progressionGrid"><div class="guidePanel"><b>Проще</b>${h(e.easy||'')}</div><div class="guidePanel"><b>Стандарт</b>${h(e.standard||'')}</div><div class="guidePanel"><b>Сложнее</b>${h(e.hard||'')}</div></div></details>${typeof atlasVideoLink==='function'?atlasVideoLink(e):''}</div></details>`;}
+  function renderExerciseGuide29(){const root=document.getElementById('exerciseGuide');if(!root)return;const current=GUIDE_DAY_BY_WEEKDAY[new Date().getDay()]||'',count=(window.EXERCISES||[]).length;root.innerHTML=`<div class="release-guide-overview"><div class="release-guide-stat"><b>${count} / ${count} визуализаций</b><span>Все 26 карточек приведены к единому формату референса: крупная фигура + карта мышц справа.</span></div><div class="release-guide-stat"><b>Единый формат</b><span>Одинаковая логика для тренировки и справочника упражнений.</span></div><div class="release-guide-stat"><b>Сборка и прогрессия</b><span>Сохранены внутри каждой карточки ниже визуала.</span></div></div>${GUIDE_DAYS.map(day=>{const list=day.exerciseIds.map(exById).filter(Boolean);return `<details class="release-guide-day exerciseGuideDay anchor" id="guide-day-${h(day.id)}" ${day.id===current?'open':''}><summary><span>${h(day.title)}</span><span class="guideDayCount">${list.length} упражнений</span></summary><div class="release-guide-list">${list.map(renderExerciseCard29).join('')}</div></details>`;}).join('')}`;}
+  window.atlasVisualBlock=visualHtml29;
+  window.renderTrainingToday=renderTrainingToday29;
+  window.renderExerciseCard=renderExerciseCard29;
+  window.renderExerciseGuide=renderExerciseGuide29;
+  function refresh29(){try{renderTrainingToday29();renderExerciseGuide29();}catch(err){console.error('BH30 refresh',err);}}
+  const prevUx=window.uxV2Init;window.uxV2Init=function(){if(typeof prevUx==='function')prevUx();setTimeout(refresh29,30);setTimeout(refresh29,220);};
+  const prevRefresh=window.uxV2Refresh;window.uxV2Refresh=function(){if(typeof prevRefresh==='function')prevRefresh();refresh29();};
+  setTimeout(refresh29,60);
+})();
+</script>
+
 </body></html>
