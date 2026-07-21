@@ -1,0 +1,43 @@
+name: Build fixed index
+on:
+  push:
+    branches: [chatgpt-build-fixed-index-20260721]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove premature script closing tag
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          broken = "})();\n</script>\n\nfunction init(){"
+          fixed = "})();\n\nfunction init(){"
+          if s.count(broken) != 1:
+              raise SystemExit(f'Expected exactly one broken marker, found {s.count(broken)}')
+          s = s.replace(broken, fixed, 1)
+          p.write_text(s, encoding='utf-8')
+      - name: Validate corrected structure
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          s = Path('index.html').read_text(encoding='utf-8')
+          assert "})();\n</script>\n\nfunction init(){" not in s
+          assert "})();\n\nfunction init(){" in s
+          assert s.rstrip().endswith('</body></html>')
+          assert s.count('<script') == s.count('</script>')
+          blocks = re.findall(r'<script[^>]*>(.*?)</script>', s, flags=re.S|re.I)
+          Path('/tmp/app.js').write_text('\n'.join(blocks), encoding='utf-8')
+      - name: JavaScript syntax check
+        run: node --check /tmp/app.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: haaland-os-fixed-index
+          path: index.html
+          if-no-files-found: error
